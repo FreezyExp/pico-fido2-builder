@@ -30,6 +30,7 @@ sudo pacman -Syu podman podman-compose
 
 # macOS
 brew install podman podman-compose
+```
 
 ### Initial Setup
 ```bash
