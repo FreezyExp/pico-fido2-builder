@@ -28,7 +28,7 @@ echo -e "  USB VID: $USB_VID"
 echo -e "  USB PID: $USB_PID\n"
 
 # Create directory structure
-mkdir -p src sdks release
+mkdir -p src sdks release home
 
 # Setup pico-fido2 repository
 if [ ! -d "src/pico-fido2" ]; then
@@ -95,10 +95,6 @@ if [[ "$BUILD_TYPE" =~ ^(ESP32|ESP32-S3|ESP32-S2|ALL)$ ]]; then
         cd ../..
     fi
 fi
-
-
-# Create directories for build outputs
-mkdir -p release build
 
 echo -e "${GREEN}Setup complete!${NC}"
 echo -e "${BLUE}Starting Docker build...${NC}\n"
