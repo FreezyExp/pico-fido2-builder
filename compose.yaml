@@ -30,13 +30,4 @@ services:
       # Build outputs
       - ./release:/app/release
       - ./home:/home/
-
-    # Resource limits
-    deploy:
-      resources:
-        limits:
-          cpus: '4'
-          memory: 4G
-        reservations:
-          cpus: '2'
-          memory: 2G
+      
