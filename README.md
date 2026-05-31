@@ -1,5 +1,12 @@
 # Building pico-fido2 with Docker/Podman
 
+> [!WARNING]
+> Only ESP-S3 was built and tested so far, in theory S2 should build with little issues. Pico might require some additional setup.
+
+> [!NOTE]
+> AI was used to generate a large portion of the files, some human corrections were made. Expect some jankyness as I did not keep best practises in mind for Docker / Podman / git usage.
+> My main goal was to get my s3 in a working state, sharing these files now in there current state for the community to experiment with.
+
 This guide explains how to build pico-fido2 firmware for Raspberry Pi Pico and ESP32 variants using Docker or Podman, keeping your host system clean.
 
 ## Prerequisites
