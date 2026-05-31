@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  pico-fido2-builder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pico-fido2-builder
+    userns_mode: "keep-id"
+
+    # Environment variables to control build behavior
+    environment:
+      # Build type: PICO, ESP32, or ALL
+      BUILD_TYPE: ${BUILD_TYPE:-ALL}
+
+      # Pico SDK configuration
+      PICO_BOARD: ${PICO_BOARD:-pico}
+      USB_VID: ${USB_VID:-0x1D50}
+      USB_PID: ${USB_PID:-0x619B}
+
+    # Volume mounts
+    volumes:
+      # Source code (read-write for git operations)
+      - ./src/pico-fido2:/app/src/pico-fido2
+
+      # SDKs (read-write for tool installations)
+      - ./sdks/pico-sdk:/app/sdks/pico-sdk
+      - ./sdks/esp-idf:/app/sdks/esp-idf
+
+      # Build outputs
+      - ./release:/app/release
+      - ./home:/home/
+
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 4G
+        reservations:
+          cpus: '2'
+          memory: 2G
