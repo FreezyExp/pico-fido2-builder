@@ -11,8 +11,8 @@ This guide explains how to build pico-fido2 firmware for Raspberry Pi Pico and E
 
 ## Prerequisites
 
-- **Docker** or **Podman** installed
-- **podman-compose** or **docker-compose** installed
+- **Podman** and **podman-compose** installed
+- or for **Docker** and *docker compose*: change the build.sh ```podman-compose``` command to ```docker compose```
 - **Git** installed on the host
 
 ### Installation
@@ -24,6 +24,9 @@ sudo dnf install podman podman-compose
 
 # Debian/Ubuntu
 sudo apt install podman podman-compose
+
+# Arch
+sudo pacman -Syu podman podman-compose
 
 # macOS
 brew install podman podman-compose
@@ -43,37 +46,33 @@ BUILD_TYPE=PICO ./build.sh
 
 # Build only ESP32 (S2 and S3)
 BUILD_TYPE=ESP32 ./build.sh
+
+# supported values: PICO, ESP32, ESP32-S3, ESP32-S2, ALL defaults to ALL
 ```
 
 ### Use .env
-build.sh will load the .env next to it, if availabel
+build.sh will load the .env next to it, if available. ./build.sh then uses these always.
 ```bash
 BUILD_TYPE=ESP32
 USB_VID=0x1D50
 USB_PID=0x619B
 ```
-or
+or more specifically, only S3
 ```bash
-BUILD_TYPE=ESP32
-PICO_BOARD=pico
+BUILD_TYPE=ESP32-S3
 USB_VID=0x1D50
 USB_PID=0x619B
 ```
 
 ### Update Everything and Rebuild
 ```bash
-# Pull latest changes for all repos
-./setup.sh
-
-# Rebuild with latest code
-podman-compose up --build
+./build.sh
 ```
-
 ---
 
 ## Key Features
 
-- **Modular Build Types**: Control which firmware to build (PICO, ESP32, or both)
+- **Modular Build Types**: Control which firmware to build (PICO, ESP32, ESP32-S3, ESP32-S2 or ALL)
 - **External SDK Management**: SDKs in `./sdks/` folder are persistent and reusable
 - **Persistent Build Cache**: Build directory binds to host for incremental rebuilds
 - **Setup Script**: Handles initial clone, submodule initialization, and updates
