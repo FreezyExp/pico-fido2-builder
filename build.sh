@@ -112,6 +112,4 @@ fi
 
 podman-compose up --build
 
-echo -e "${GREEN}=== Build complete ===${NC}"
-echo -e "${YELLOW}Release artifacts:${NC}"
-ls -lh release/
+echo -e "${GREEN}=== All Done ===${NC}"
