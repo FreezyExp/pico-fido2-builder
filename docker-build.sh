@@ -19,8 +19,6 @@ echo -e "${YELLOW}USB VID: $USB_VID, USB PID: $USB_PID${NC}\n"
 
 cd /app/src/pico-fido2
 
-mkdir -p /app/release
-
 echo -e "${YELLOW}=== NEW ===${NC}\n"
 
 # Build for PICO
@@ -28,6 +26,7 @@ if [[ "$BUILD_TYPE" =~ ^(PICO|ALL)$ ]]; then
     echo -e "${BLUE}=== Building for Raspberry Pi Pico ===${NC}\n"
 
     if [ ! -d "/app/build/pico" ]; then
+        mkdir -p /app/build
         mkdir -p /app/build/pico
     fi
 
@@ -56,11 +55,6 @@ fi
 # Build for ESP32-S3
 if [[ "$BUILD_TYPE" =~ ^(ESP32-S3|ESP32|ALL)$ ]]; then
     echo -e "${BLUE}=== Building for ESP32-S3 ===${NC}\n"
-
-    if [ ! -d "/app/build/esp32-s3" ]; then
-        mkdir -p /app/build/esp32-s3
-        mkdir -p /app/build/esp32-s3/build
-    fi
 
     cd $ESP_IDF_PATH
 
